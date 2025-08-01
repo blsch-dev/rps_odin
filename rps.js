@@ -15,81 +15,74 @@ function getUserChoice(){
     return userChoice.toLowerCase();
 }
 
-function win(){
-    console.log("You win!");
-    userScore++;
-}
 
-function draw(){
-    console.log("Draw!");
-}
-
-function loss(){
-    console.log("You lose!");
-    computerScore++;
-}
-
-function playRound(userChoice, computerChoice){
-
-
-    if(userChoice === "rock"){
-        switch(computerChoice){
-            case "rock":
-                console.log(draw());
-                break;
-            case "paper":
-                console.log(loss());
-                break;
-            case "scissors":
-                console.log(win());
-                break;
-            default: 
-                console.log("Invalid round, try again!");
-        }
-    } else if(userChoice === "paper"){
-        switch (computerChoice){
-            case "rock":
-                console.log(win());
-                break;
-            case "paper":
-                console.log(draw());
-                break;
-            case "scissors":
-                console.log(loss());
-                break;
-            default: 
-                console.log("Invalid round, try again!");
-        }
-    } else {
-        switch(computerChoice){
-            case "rock":
-                console.log(loss());
-                break;
-            case "paper":
-                console.log(win());
-                break;
-            case "scissors":
-                console.log(draw());
-                break;
-            default: 
-                console.log("Invalid round, try again!");
-        }
-    }
-    console.log("Your choice was: " + userChoice);
-    console.log("Computer's choice was: " + computerChoice);
-    console.log("Your score is: " + userScore);
-    console.log("Computer's score is: " + computerScore);
-
-}
+function playGame(){
 
     let userScore = 0;
     let computerScore = 0;
-    
-function playGame(){
+
+    let draw = () => console.log("Draw!");
+    let win = () => console.log("You win!");
+    let loss = () => console.log("You lose!");
+
+    function playRound(userChoice, computerChoice){
+        if(userChoice === "rock"){
+            switch(computerChoice){
+                case "rock":
+                    draw();
+                    break;
+                case "paper":
+                    loss();
+                    computerScore++;
+                    break;
+                case "scissors":
+                    win();
+                    userScore++;
+                    break;
+                default: 
+                    console.log("Invalid round, try again!");
+            }
+        } else if(userChoice === "paper"){
+            switch (computerChoice){
+                case "rock":
+                    win();
+                    userScore++;
+                    break;
+                case "paper":
+                    draw();
+                    break;
+                case "scissors":
+                    loss();
+                    computerScore++;
+                    break;
+                default: 
+                    console.log("Invalid round, try again!");
+            }
+        } else {
+            switch(computerChoice){
+                case "rock":
+                    loss();
+                    break;
+                case "paper":
+                    win();
+                    break;
+                case "scissors":
+                    draw();
+                    break;
+                default: 
+                    console.log("Invalid round, try again!");
+            }
+        }
+    }
+
     
     for(i = 0; i < 5; i++){
         const userChoice = getUserChoice();
         const computerChoice = getComputerChoice(randomNumber());
         playRound(userChoice, computerChoice);
+        console.log("Your choice was: " + userChoice);
+        console.log("Computer's choice was: " + computerChoice);
+        console.log("Your score is: " + userScore);
+        console.log("Computer's score is: " + computerScore);
     }
 }
